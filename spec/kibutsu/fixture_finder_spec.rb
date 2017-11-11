@@ -4,7 +4,7 @@ RSpec.describe Kibutsu::FixtureFinder do
   describe '#fixture_file_paths' do
     it 'finds fixture file paths ending in .yml or .yml.erb' do
       expect(subject.fixture_file_paths).to eq(
-        ['spec/fixtures/books.yml', 'spec/fixtures/authors.yml.erb']
+        ['spec/fixtures/authors.yml', 'spec/fixtures/books.yml.erb']
       )
     end
   end
