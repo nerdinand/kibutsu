@@ -2,11 +2,14 @@ Gem::Specification.new do |s|
   s.name        = 'kibutsu'
   s.version     = '0.0.0'
   s.date        = '2017-11-10'
-  s.summary     = 'Fixtures for hanami'
-  s.description = "A poor man's fixture library for hanami"
+  s.summary     = 'A fixture library for sequel'
+  s.description = "Kibutsu is an easy-to-use database fixture library.
+
+The only dependency kibutsu has is the sequel gem. Thus, you may use it \
+with any project that uses sequel, e.g. with a hanami app!"
   s.authors     = ['Ferdinand Niedermann']
   s.email       = 'ferdinand.niedermann@gmail.com'
-  s.files       = ['lib/kibutsu.rb']
+  s.files       = Dir['lib/**/*.rb']
   s.homepage    = 'http://rubygems.org/gems/kibutsu'
   s.license     = 'MIT'
   s.add_runtime_dependency 'sequel', ['~> 4.49.0']
