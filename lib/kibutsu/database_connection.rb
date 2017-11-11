@@ -3,6 +3,8 @@ require 'sequel'
 require_relative 'foreign_key_column'
 
 module Kibutsu
+  # Only class that directly interacts with Sequel. Used for retrieving data
+  # from the database and inserting fixtures into it.
   class DatabaseConnection
     def initialize(connection_string)
       @connection = Sequel.connect(connection_string)
@@ -38,6 +40,8 @@ module Kibutsu
     attr_reader :connection
 
     def insert_table(fixture_table)
+      connection[fixture_table.name.to_sym].delete
+
       fixture_table.fixtures.each do |fixture|
         insert_fixture(fixture)
       end

@@ -10,7 +10,17 @@ module Kibutsu
   end
 
   def self.fixture_name_to_id(fixture_name)
-    raise unless fixture_name.is_a? String
-    fixture_name.hash
+    fixture_name.to_s.hash
+  end
+
+  def self.dont_care(type)
+    case type
+    when :string
+      "don't care about this string"
+    when :number
+      0
+    when :boolean
+      false
+    end
   end
 end

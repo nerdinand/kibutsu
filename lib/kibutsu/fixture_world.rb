@@ -5,6 +5,8 @@ require_relative 'fixture_loader'
 require_relative 'database_connection'
 
 module Kibutsu
+  # Singleton class that holds all the information about fixtures and fixture
+  # tables. This class really ties whole the gem together.
   class FixtureWorld
     include Singleton
 
@@ -23,7 +25,9 @@ module Kibutsu
 
       fixture_file_paths = FixtureFinder.new(fixtures_path).fixture_file_paths
       fixture_file_paths.each do |fixture_file_path|
-      FixtureLoader.new(fixture_file_path, database_connection).load_fixture_tables
+        FixtureLoader.new(
+          fixture_file_path, database_connection
+        ).load_fixture_tables
       end
     end
 
@@ -45,8 +49,10 @@ module Kibutsu
 
     def fill_fixture_table_information
       @fixture_tables.each do |fixture_table|
-        fixture_table.column_names = database_connection.column_names(fixture_table.name)
-        fixture_table.foreign_key_columns = database_connection.foreign_key_columns(fixture_table.name)
+        fixture_table.column_names =
+          database_connection.column_names(fixture_table.name)
+        fixture_table.foreign_key_columns =
+          database_connection.foreign_key_columns(fixture_table.name)
       end
     end
 

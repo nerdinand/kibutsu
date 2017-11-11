@@ -1,4 +1,5 @@
 module Kibutsu
+  # A database table in the fixture world.
   class FixtureTable
     def initialize(name)
       @name = name
@@ -24,7 +25,9 @@ module Kibutsu
       end
     end
 
-    attr_reader :name, :fixtures, :foreign_key_source_tables, :foreign_key_columns
+    attr_reader(
+      :name, :fixtures, :foreign_key_source_tables, :foreign_key_columns
+    )
     attr_accessor :column_names
   end
 end

@@ -1,4 +1,5 @@
 module Kibutsu
+  # Finds fixture files with the right file extensions to load.
   class FixtureFinder
     def initialize(fixtures_path)
       @fixtures_path = fixtures_path

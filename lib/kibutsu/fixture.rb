@@ -1,6 +1,7 @@
 require 'date'
 
 module Kibutsu
+  # Corresponds to one named fixture from a fixture file.
   class Fixture
     TIMESTAMP_COLUMN_NAMES = %w[created_at updated_at].freeze
 
@@ -28,7 +29,8 @@ module Kibutsu
       foreign_key_columns.each do |foreign_key_column|
         foreign_fixture_name = foreign_table_reference(attr, foreign_key_column)
         if foreign_fixture_name
-          attr[foreign_key_column.name] = Kibutsu.fixture_name_to_id(foreign_fixture_name)
+          attr[foreign_key_column.name] =
+            Kibutsu.fixture_name_to_id(foreign_fixture_name)
         end
       end
       attr
