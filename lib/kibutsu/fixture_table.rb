@@ -1,6 +1,8 @@
 class Kibutsu::FixtureTable
-  def initialize(table_name)
+  def initialize(table_name, column_names, foreign_key_column_names)
     @table_name = table_name
+    @column_names = column_names
+    @foreign_key_column_names = foreign_key_column_names
     @fixtures = []
   end
 
@@ -8,5 +10,5 @@ class Kibutsu::FixtureTable
     @fixtures << fixture
   end
 
-  attr_reader :table_name, :fixtures
+  attr_reader :table_name, :column_names, :foreign_key_column_names, :fixtures
 end

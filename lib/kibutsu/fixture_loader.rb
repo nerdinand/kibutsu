@@ -5,8 +5,9 @@ require_relative 'fixture_table'
 require_relative 'fixture'
 
 class Kibutsu::FixtureLoader
-  def initialize(fixture_file_path)
+  def initialize(fixture_file_path, database_connection)
     @fixture_file_path = fixture_file_path
+    @database_connection = database_connection
   end
 
   def fixture_tables
@@ -17,18 +18,22 @@ class Kibutsu::FixtureLoader
       file_content
     end
     fixtures_hash = load_fixture(yaml_content)
+    build_fixture_tables(fixtures_hash)
+  end
+
+  private
+
+  attr_reader :fixture_file_path, :database_connection
+
+  def build_fixture_tables(fixtures_hash)
     fixtures_hash.map do |table_name, fixtures|
-      table = Kibutsu::FixtureTable.new(table_name)
+      table = Kibutsu::FixtureTable.new(table_name, database_connection.column_names(table_name), database_connection.foreign_key_column_names(table_name))
       fixtures.each do |fixture_name, attributes|
         table << Kibutsu::Fixture.new(table, fixture_name, attributes)
       end
       table
     end
   end
-
-  private
-
-  attr_reader :fixture_file_path
 
   def run_erb(file_content)
     ERB.new(file_content).result(binding)

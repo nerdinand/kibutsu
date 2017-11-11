@@ -11,12 +11,14 @@ class Kibutsu::DatabaseConnection
     end
   end
 
-  def foreign_key_list(fixture_table)
-    connection.foreign_key_list(fixture_table.table_name)
+  def column_names(table_name)
+    connection.schema(table_name.to_s).map(&:first)
   end
 
-  def column_names(fixture_table)
-    connection.schema(fixture_table.table_name).map(&:first)
+  def foreign_key_column_names(table_name)
+    connection.foreign_key_list(table_name.to_s).map do |foreign_key_info|
+      foreign_key_info[:columns].first
+    end
   end
 
   private
@@ -30,12 +32,9 @@ class Kibutsu::DatabaseConnection
   end
 
   def insert_fixture(fixture)
+    p fixture
     fixture_table = fixture.table
-
-    attributes = fixture.enriched_attributes(
-      foreign_key_list(fixture_table),
-      column_names(fixture_table)
-    )
+    attributes = fixture.enriched_attributes
     connection[fixture_table.table_name.to_sym].insert(attributes)
   end
 end

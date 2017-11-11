@@ -34,27 +34,19 @@ RSpec.describe Kibutsu::DatabaseConnection do
   end
 
   subject {described_class.new(database_connection_url)}
-  let(:fixture_table) { OpenStruct.new(table_name: 'books') }
+  let(:table_name) { 'books' }
 
-  describe '#foreign_key_list' do
+  describe '#foreign_key_column_names' do
     it 'returns information about the foreign keys of a table' do
-      expect(subject.foreign_key_list(fixture_table)).to eq(
-        [
-          {
-            columns: [:author_id],
-            table: :authors,
-            key: nil,
-            on_update: :no_action,
-            on_delete: :no_action
-          }
-        ]
+      expect(subject.foreign_key_column_names(table_name)).to eq(
+        [ :author_id ]
       )
     end
   end
 
   describe '#column_names' do
     it 'returns the column names of a table' do
-      expect(subject.column_names(fixture_table)).to eq(
+      expect(subject.column_names(table_name)).to eq(
          [:id, :author_id, :title, :created_at, :updated_at]
       )
     end
