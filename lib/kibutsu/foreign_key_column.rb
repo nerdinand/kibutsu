@@ -1,10 +1,11 @@
 module Kibutsu
   class ForeignKeyColumn
-    def initialize(name, referencing_table)
+    def initialize(source_table, name, target_table)
+      @source_table = source_table
       @name = name
-      @referencing_table = referencing_table
+      @target_table = target_table
     end
 
-    attr_reader :name, :referencing_table
+    attr_reader :source_table, :name, :target_table
   end
 end

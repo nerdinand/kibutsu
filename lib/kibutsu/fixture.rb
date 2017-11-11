@@ -25,13 +25,17 @@ module Kibutsu
     end
 
     def enrich_with_foreign_keys(attr)
-      table_references = table_references_in_attributes(table.foreign_key_columns)
-      table_references.each do |reference|
-        referred_fixture_name = attr[reference.to_s]
-        attr[reference.to_s] = Kibutsu.fixture_name_to_id(referred_fixture_name)
-        attr.delete(column_name_to_model_name(reference))
+      foreign_key_columns.each do |foreign_key_column|
+        foreign_fixture_name = foreign_table_reference(attr, foreign_key_column)
+        if foreign_fixture_name
+          attr[foreign_key_column.name] = Kibutsu.fixture_name_to_id(foreign_fixture_name)
+        end
       end
       attr
+    end
+
+    def foreign_key_columns
+      table.foreign_key_columns
     end
 
     def enrich_with_timestamps(attr)
@@ -43,12 +47,8 @@ module Kibutsu
       attr
     end
 
-    def table_references_in_attributes(foreign_keys)
-      foreign_keys.map do |foreign_key|
-        if @attributes.key?(column_name_to_model_name(foreign_key.name))
-          foreign_key.name
-        end
-      end.compact
+    def foreign_table_reference(attr, foreign_key_column)
+      attr.delete(column_name_to_model_name(foreign_key_column.name))
     end
 
     def column_name_to_model_name(column_name)

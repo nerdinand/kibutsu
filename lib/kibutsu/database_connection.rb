@@ -11,6 +11,7 @@ module Kibutsu
     def insert_fixture_tables(fixture_tables)
       fixture_tables.each do |fixture_table|
         insert_table(fixture_table)
+        insert_fixture_tables(fixture_table.foreign_key_source_tables)
       end
     end
 
@@ -21,10 +22,15 @@ module Kibutsu
     def foreign_key_columns(table_name)
       connection.foreign_key_list(table_name.to_s).map do |foreign_key_info|
         ForeignKeyColumn.new(
+          FixtureWorld.instance.find_table(table_name.to_s),
           foreign_key_info[:columns].first.to_s,
-          foreign_key_info[:table].to_s
+          FixtureWorld.instance.find_table(foreign_key_info[:table].to_s)
         )
       end
+    end
+
+    def table_names
+      connection.tables
     end
 
     private
@@ -40,7 +46,6 @@ module Kibutsu
     def insert_fixture(fixture)
       fixture_table = fixture.table
       attributes = fixture.enriched_attributes
-      p attributes
       connection[fixture_table.name.to_sym].insert(attributes)
     end
   end

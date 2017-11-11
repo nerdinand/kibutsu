@@ -10,6 +10,7 @@ module Kibutsu
   end
 
   def self.fixture_name_to_id(fixture_name)
+    raise unless fixture_name.is_a? String
     fixture_name.hash
   end
 end

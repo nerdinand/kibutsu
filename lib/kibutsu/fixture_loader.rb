@@ -11,7 +11,7 @@ module Kibutsu
       @database_connection = database_connection
     end
 
-    def fixture_tables
+    def load_fixture_tables
       file_content = File.read(fixture_file_path)
       yaml_content = if fixture_file_path.end_with? '.yml.erb'
                        run_erb(file_content)
@@ -28,12 +28,7 @@ module Kibutsu
 
     def build_fixture_tables(fixtures_hash)
       fixtures_hash.map do |table_name, fixtures|
-        table = Kibutsu::FixtureTable.new(
-          table_name,
-          database_connection.column_names(table_name),
-          database_connection.foreign_key_columns(table_name)
-        )
-
+        table = Kibutsu::FixtureWorld.instance.find_table(table_name)
         fixtures.each do |fixture_name, attributes|
           table << Kibutsu::Fixture.new(table, fixture_name, attributes)
         end
