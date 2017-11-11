@@ -33,13 +33,13 @@ RSpec.describe Kibutsu::DatabaseConnection do
     FileUtils.rm_f db_file_path
   end
 
-  subject {described_class.new(database_connection_url)}
+  subject { described_class.new(database_connection_url) }
   let(:table_name) { 'books' }
 
   describe '#foreign_key_column_names' do
     it 'returns information about the foreign keys of a table' do
       expect(subject.foreign_key_column_names(table_name)).to eq(
-        [ :author_id ]
+        [:author_id]
       )
     end
   end
@@ -47,7 +47,7 @@ RSpec.describe Kibutsu::DatabaseConnection do
   describe '#column_names' do
     it 'returns the column names of a table' do
       expect(subject.column_names(table_name)).to eq(
-         [:id, :author_id, :title, :created_at, :updated_at]
+        %i[id author_id title created_at updated_at]
       )
     end
   end

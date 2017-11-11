@@ -7,11 +7,11 @@ Gem::Specification.new do |s|
   s.authors     = ['Ferdinand Niedermann']
   s.email       = 'ferdinand.niedermann@gmail.com'
   s.files       = ['lib/kibutsu.rb']
-  s.homepage    =
-    'http://rubygems.org/gems/kibutsu'
-  s.license       = 'MIT'
+  s.homepage    = 'http://rubygems.org/gems/kibutsu'
+  s.license     = 'MIT'
   s.add_runtime_dependency 'sequel', ['~> 4.49.0']
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'rubocop'
 end

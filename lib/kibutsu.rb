@@ -1,6 +1,8 @@
-require_relative 'kibutsu/kibutsu'
 require_relative 'kibutsu/fixture_world'
 
+#
+# Main module containing the public API of Kibutsu
+#
 module Kibutsu
   def self.load_fixtures!(database_connection_url, fixtures_path)
     fixture_world = FixtureWorld.instance
