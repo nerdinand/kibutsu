@@ -25,8 +25,7 @@ module Kibutsu
     end
 
     def enrich_with_foreign_keys(attr)
-      table_references =
-        table_references_in_attributes(table.foreign_key_column_names)
+      table_references = table_references_in_attributes(table.foreign_key_columns)
       table_references.each do |reference|
         referred_fixture_name = attr[reference.to_s]
         attr[reference.to_s] = Kibutsu.fixture_name_to_id(referred_fixture_name)
@@ -44,10 +43,10 @@ module Kibutsu
       attr
     end
 
-    def table_references_in_attributes(foreign_key_column_names)
-      foreign_key_column_names.map do |foreign_key_column_name|
-        if @attributes.key?(column_name_to_model_name(foreign_key_column_name))
-          foreign_key_column_name
+    def table_references_in_attributes(foreign_keys)
+      foreign_keys.map do |foreign_key|
+        if @attributes.key?(column_name_to_model_name(foreign_key.name))
+          foreign_key.name
         end
       end.compact
     end

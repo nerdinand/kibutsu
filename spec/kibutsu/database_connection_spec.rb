@@ -36,11 +36,11 @@ RSpec.describe Kibutsu::DatabaseConnection do
   subject { described_class.new(database_connection_url) }
   let(:table_name) { 'books' }
 
-  describe '#foreign_key_column_names' do
+  describe '#foreign_key_columns' do
     it 'returns information about the foreign keys of a table' do
-      expect(subject.foreign_key_column_names(table_name)).to eq(
-        [:author_id]
-      )
+      expect(subject.foreign_key_columns(table_name).size).to eq(1)
+      expect(subject.foreign_key_columns(table_name).first.name).to eq('author_id')
+      expect(subject.foreign_key_columns(table_name).first.referencing_table).to eq('authors')
     end
   end
 

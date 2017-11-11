@@ -1,9 +1,9 @@
 module Kibutsu
   class FixtureTable
-    def initialize(table_name, column_names, foreign_key_column_names)
-      @table_name = table_name
+    def initialize(name, column_names, foreign_key_columns)
+      @name = name
       @column_names = column_names
-      @foreign_key_column_names = foreign_key_column_names
+      @foreign_key_columns = foreign_key_columns
       @fixtures = []
     end
 
@@ -11,6 +11,10 @@ module Kibutsu
       @fixtures << fixture
     end
 
-    attr_reader :table_name, :column_names, :foreign_key_column_names, :fixtures
+    def dependent_tables
+
+    end
+
+    attr_reader :name, :column_names, :foreign_key_columns, :fixtures
   end
 end

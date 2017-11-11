@@ -31,7 +31,7 @@ module Kibutsu
         table = Kibutsu::FixtureTable.new(
           table_name,
           database_connection.column_names(table_name),
-          database_connection.foreign_key_column_names(table_name)
+          database_connection.foreign_key_columns(table_name)
         )
 
         fixtures.each do |fixture_name, attributes|

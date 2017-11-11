@@ -1,5 +1,7 @@
 require 'sequel'
 
+require_relative 'foreign_key_column'
+
 module Kibutsu
   class DatabaseConnection
     def initialize(connection_string)
@@ -16,9 +18,12 @@ module Kibutsu
       connection.schema(table_name.to_s).map(&:first)
     end
 
-    def foreign_key_column_names(table_name)
+    def foreign_key_columns(table_name)
       connection.foreign_key_list(table_name.to_s).map do |foreign_key_info|
-        foreign_key_info[:columns].first
+        ForeignKeyColumn.new(
+          foreign_key_info[:columns].first.to_s,
+          foreign_key_info[:table].to_s
+        )
       end
     end
 
@@ -33,10 +38,10 @@ module Kibutsu
     end
 
     def insert_fixture(fixture)
-      p fixture
       fixture_table = fixture.table
       attributes = fixture.enriched_attributes
-      connection[fixture_table.table_name.to_sym].insert(attributes)
+      p attributes
+      connection[fixture_table.name.to_sym].insert(attributes)
     end
   end
 end
