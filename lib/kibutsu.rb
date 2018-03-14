@@ -12,8 +12,11 @@ module Kibutsu
   end
 
   def self.fixture_name_to_id(fixture_name)
-    # simple 32 bit (unsigned) hash, converted to signed for postgres integer type
-    XXhash.xxh32(fixture_name.to_s) - 2147483648
+    # hash algorithm based on djb2 (see http://www.cse.yorku.ca/~oz/hash.html)
+    # scaled to signed int range for postgres int compatibility
+    hash = 5381
+    fixture_name.to_s.each_char { |c| hash = ((hash << 5) + hash) + c.ord }
+    (hash % 4294967295) - 2147483648
   end
 
   def self.dont_care(type)

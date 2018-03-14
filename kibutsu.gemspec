@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'kibutsu'
-  s.version     = '1.0.3'
+  s.version     = '1.0.4'
   s.date        = '2017-11-10'
   s.summary     = 'A fixture library for sequel'
   s.description = "Kibutsu is an easy-to-use database fixture library.
@@ -14,7 +14,6 @@ with any project that uses sequel, e.g. with a hanami app!"
   s.license     = 'MIT'
 
   s.add_runtime_dependency 'sequel', ['~> 4.49.0']
-  s.add_runtime_dependency 'xxhash', ['~> 0.4.0']
 
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'pry-byebug'
