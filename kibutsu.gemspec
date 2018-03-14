@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'kibutsu'
-  s.version     = '1.0.2'
+  s.version     = '1.0.3'
   s.date        = '2017-11-10'
   s.summary     = 'A fixture library for sequel'
   s.description = "Kibutsu is an easy-to-use database fixture library.
