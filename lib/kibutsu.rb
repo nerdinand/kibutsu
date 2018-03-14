@@ -1,5 +1,3 @@
-require 'xxhash'
-
 require_relative 'kibutsu/fixture_world'
 
 #
