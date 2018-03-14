@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    kibutsu (1.0.1)
+    kibutsu (1.0.2)
       sequel (~> 4.49.0)
+      xxhash (~> 0.4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -49,6 +50,7 @@ GEM
     sequel (4.49.0)
     sqlite3 (1.3.13)
     unicode-display_width (1.3.0)
+    xxhash (0.4.0)
 
 PLATFORMS
   ruby
@@ -61,4 +63,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.15.3
+   1.16.1

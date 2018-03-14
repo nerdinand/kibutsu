@@ -1,3 +1,5 @@
+require 'xxhash'
+
 require_relative 'kibutsu/fixture_world'
 
 #
@@ -10,7 +12,8 @@ module Kibutsu
   end
 
   def self.fixture_name_to_id(fixture_name)
-    fixture_name.to_s.hash
+    # simple 32 bit (unsigned) hash, converted to signed for postgres integer type
+    XXhash.xxh32(fixture_name.to_s) - 2147483648
   end
 
   def self.dont_care(type)
