@@ -17,6 +17,8 @@ module Kibutsu
 
       load_fixtures(fixtures_path)
       database_connection.insert_fixture_tables(tables_without_dependencies)
+    ensure
+      database_connection.disconnect
     end
 
     def load_fixtures(fixtures_path)

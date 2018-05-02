@@ -35,6 +35,10 @@ module Kibutsu
       connection.tables
     end
 
+    def disconnect
+      connection.disconnect
+    end
+    
     private
 
     attr_reader :connection
