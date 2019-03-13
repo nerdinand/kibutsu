@@ -41,10 +41,10 @@ module Kibutsu
     end
 
     def enrich_with_timestamps(attr)
-      date_time = DateTime.now
+      time = Time.now
       TIMESTAMP_COLUMN_NAMES.each do |timestamp_column_name|
         next unless table.column_names.include? timestamp_column_name.to_sym
-        attr[timestamp_column_name] = date_time
+        attr[timestamp_column_name] = time
       end
       attr
     end

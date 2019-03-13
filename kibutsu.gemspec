@@ -13,10 +13,10 @@ with any project that uses sequel, e.g. with a hanami app!"
   s.homepage    = 'https://github.com/nerdinand/kibutsu'
   s.license     = 'MIT'
 
-  s.add_runtime_dependency 'sequel', ['~> 4.49']
+  s.add_runtime_dependency 'sequel', ['~> 5.18']
 
-  s.add_development_dependency 'rspec', '~> 3.7'
   s.add_development_dependency 'pry-byebug', '~> 3.6'
-  s.add_development_dependency 'sqlite3', '~> 1.3'
+  s.add_development_dependency 'rspec', '~> 3.7'
   s.add_development_dependency 'rubocop', '~> 0.55'
+  s.add_development_dependency 'sqlite3', '~> 1.3'
 end

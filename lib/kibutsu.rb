@@ -14,7 +14,7 @@ module Kibutsu
     # scaled to signed int range for postgres int compatibility
     hash = 5381
     fixture_name.to_s.each_char { |c| hash = ((hash << 5) + hash) + c.ord }
-    (hash % 4294967295) - 2147483648
+    (hash % 4_294_967_295) - 2_147_483_648
   end
 
   def self.dont_care(type)

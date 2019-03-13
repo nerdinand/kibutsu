@@ -38,7 +38,7 @@ module Kibutsu
     def disconnect
       connection.disconnect
     end
-    
+
     private
 
     attr_reader :connection
