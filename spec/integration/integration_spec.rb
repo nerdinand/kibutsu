@@ -31,7 +31,7 @@ RSpec.describe Kibutsu do
   end
 
   after do
-    FileUtils.rm_f db_file_path
+    # FileUtils.rm_f db_file_path
   end
 
   it 'loads fixtures' do
@@ -48,11 +48,11 @@ RSpec.describe Kibutsu do
 
     expect(connection[:books].count).to eq(3)
     books = connection[:books].order(:created_at).to_a
-    
+
     expect(books[0][:title]).to eq("The Hitchhiker's Guide to the Galaxy")
     expect(books[0][:author_id]).to eq(authors[0][:id])
     expect(books[0][:page_count]).to eq(179)
-    
+
     expect(books[1][:title]).to eq('The Restaurant at the End of the Universe')
     expect(books[1][:author_id]).to eq(authors[0][:id])
     expect(books[1][:page_count]).to eq(200)
