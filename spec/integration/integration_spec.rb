@@ -20,7 +20,7 @@ RSpec.describe Kibutsu do
 
     connection.create_table :books do
       primary_key :id
-      foreign_key :author_id, :authors, null: false
+      foreign_key :author_id, :authors, on_delete: :set_null, null: true
 
       column :title, String
       column :page_count, Integer
@@ -46,13 +46,19 @@ RSpec.describe Kibutsu do
     expect(authors[0][:created_at]).to be_a(Time)
     expect(authors[0][:updated_at]).to be_a(Time)
 
-    expect(connection[:books].count).to eq(2)
+    expect(connection[:books].count).to eq(3)
     books = connection[:books].order(:created_at).to_a
+    
     expect(books[0][:title]).to eq("The Hitchhiker's Guide to the Galaxy")
     expect(books[0][:author_id]).to eq(authors[0][:id])
     expect(books[0][:page_count]).to eq(179)
+    
     expect(books[1][:title]).to eq('The Restaurant at the End of the Universe')
     expect(books[1][:author_id]).to eq(authors[0][:id])
     expect(books[1][:page_count]).to eq(200)
+
+    expect(books[2][:title]).to eq('Book without author')
+    expect(books[2][:author_id]).to be_nil
+    expect(books[2][:page_count]).to eq(123)
   end
 end
