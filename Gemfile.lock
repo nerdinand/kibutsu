@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kibutsu (1.0.6)
+    kibutsu (1.1.0)
       sequel (~> 5.18)
 
 GEM
