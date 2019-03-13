@@ -31,7 +31,7 @@ RSpec.describe Kibutsu do
   end
 
   after do
-    # FileUtils.rm_f db_file_path
+    FileUtils.rm_f db_file_path
   end
 
   it 'loads fixtures' do
